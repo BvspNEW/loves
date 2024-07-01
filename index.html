@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>By Bvsp</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ffcccc, #ffccff, #ccccff, #ccffff, #ccffcc);
+            background-size: 400% 400%;
+            animation: gradientBackground 15s ease infinite;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .container {
+            text-align: center;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .heart {
+            color: red;
+            font-size: 50px;
+            animation: beat 1s infinite;
+        }
+        @keyframes beat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+        .message {
+            font-size: 30px;
+            margin-top: 20px;
+            color: #333;
+        }
+        .animation {
+            font-size: 18px;
+            margin-top: 20px;
+            cursor: pointer;
+            color: #007bff;
+            text-decoration: underline;
+        }
+        .love {
+            position: absolute;
+            font-size: 30px;
+            animation: fall 5s linear infinite, fadeInOut 5s linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100px); }
+            100% { transform: translateY(100vh); }
+        }
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        .menu {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+        .menu-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+        .menu-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .menu-content a:hover {
+            background-color: #ddd;
+        }
+        .social-icons {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10;
+        }
+        .social-icons a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-size: 24px;
+            color: white;
+            background-color: #007bff;
+            transition: transform 0.3s ease;
+        }
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Cat sound -->
+    <audio id="catSound" src="cat_sound.mp3"></audio>
+    <img src="cat1.jpg" id="catImage" alt="Gemess Cat" style="display: none;">
+
+
+    <div class="menu">
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        <div class="menu-content" id="menu-content">
+            <a href="#" onclick="changeBackground('linear-gradient(135deg, #ffcccc, #ffccff, #ccccff, #ccffff, #ccffcc)')">Gradient Background</a>
+            <a href="#" onclick="changeBackground('linear-gradient(to right, #ff7e5f, #feb47b)')">Sunset Background</a>
+            <a href="#" onclick="changeBackground('linear-gradient(to right, #76b852, #8dc26f)')">Green Background</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="heart" onclick="playCatSound()">🐈</div>
+        <div class="message">Buat Kamu</div>
+        <div class="animation" onclick="startAnimation()">Coba Di klik</div>
+    </div>
+    <div class="social-icons">
+        <a href="#" onclick="openSocial('https://instagram.com')"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 100%; height: 100%;"></a>
+        <a href="#" onclick="openSocial('https://tiktok.com')"><img src="tiktok.png" alt="TikTok" style="width: 100%; height: 100%;"></a>
+        <a href="#" onclick="openSocial('https://telegram.org')"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" style="width: 100%; height: 100%;"></a>
+        <a href="#" onclick="openSocial('https://youtube.com')"><img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 100%; height: 100%;"></a>
+    </div>
+    <script>
+
+function playCatSound() {
+    const catSound = document.getElementById('catSound');
+    catSound.play();
+
+    // Show cat image for 5 seconds
+    const catImage = document.getElementById('catImage');
+    catImage.style.display = 'block';
+
+    setTimeout(() => {
+        catImage.style.display = 'none';
+    }, 5000);
+}
+
+
+
+        function toggleMenu() {
+            const menuContent = document.getElementById('menu-content');
+            menuContent.style.display = menuContent.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function changeBackground(background) {
+            document.body.style.background = background;
+            document.body.style.backgroundSize = '400% 400%';
+            document.body.style.animation = 'gradientBackground 15s ease infinite';
+            toggleMenu();
+        }
+
+        function startAnimation() {
+            const container = document.querySelector('.container');
+            for (let i = 0; i < 50; i++) {
+                const love = document.createElement('div');
+                love.className = 'love';
+                love.textContent = '❤️';
+                love.style.left = Math.random() * window.innerWidth + 'px';
+                love.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(love);
+            }
+        }
+
+        function openSocial(url) {
+            window.open(url, '_blank');
+        }
+
+        function playCatSound() {
+            const catSound = document.getElementById('catSound');
+            catSound.play();
+
+            // Show cat image for 5 seconds
+            const catImage = document.createElement('img');
+            catImage.src = 'cat_image.png';
+            catImage.alt = 'Gemess Cat';
+            catImage.style.width = '200px';
+            catImage.style.position = 'absolute';
+            catImage.style.top = '50%';
+            catImage.style.left = '50%';
+            catImage.style.transform = 'translate(-50%, -50%)';
+            document.body.appendChild(catImage);
+
+            setTimeout(() => {
+                catImage.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
